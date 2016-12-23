@@ -19,5 +19,9 @@ Manually in bash:
 
     PYTHONPATH=. py.test
 
+Using tox:
+
+    tox
+
 ## Running independently or from an IDE
 Set your `PYTHONPATH` environment variable to the root of the repository.
