@@ -7,15 +7,17 @@ from modules.web_caller import get_google, GOOGLE_URL
 MOCK_GOOGLE_URL = 'http://not-going-to-work!!!'
 
 
-class TestWebCaller(TestCase):
+class TestWebCallerSimple(TestCase):
     """
-    Tests for the `web_caller` module.
+    Simple tests for the `web_caller` module.
     """
 
     @patch('modules.web_caller.requests.get')
     def test_get_google(self, get):
         """
-        Calling `get_google` works as expected.
+        Call `get_google` using `patch` to override the requests.get function
+        in order to make assertions about what happened and verify the expected
+        result.
         """
 
         # Create a mock response
@@ -36,6 +38,12 @@ class TestWebCaller(TestCase):
 
         # Check that the mocked response.status_code is as expected
         self.assertEqual(200, response.status_code)
+
+
+class TestWebCallerWithExceptions(TestCase):
+    """
+    Tests for the `web_caller` module with exception assertions.
+    """
 
     @patch('modules.web_caller.GOOGLE_URL', MOCK_GOOGLE_URL)
     def test_get_google_with_exception(self):
@@ -64,3 +72,22 @@ class TestWebCaller(TestCase):
         with self.assertRaises(ConnectionError):
             # Call the function
             get_google()
+
+    @patch('modules.web_caller.requests.get')
+    def test_get_google_with_mock_driven_exception(self, get):
+        """
+        Call the `get_google` function while using `patch` to create an
+        unreachable URL.
+        """
+
+        # Assign a side_effect of requests.exceptions.ConnectionError to the
+        # patched requests.get function to simulate an excepion being raised
+        get.side_effect = ConnectionError('Error!')
+
+        # Establish an assertRaises context manager
+        with self.assertRaises(ConnectionError):
+            # Call the function
+            get_google()
+
+        # Check that requests.get was called as expected
+        get.assert_called_once_with(GOOGLE_URL)
