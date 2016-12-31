@@ -1,1 +1,1 @@
-PYTHONPATH=. py.test
+PYTHONPATH=. pytest --cov --flake8 .
