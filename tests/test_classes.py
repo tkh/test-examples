@@ -1,5 +1,5 @@
 from unittest import TestCase
-from mock import patch
+from mock import patch, Mock
 
 from modules.classes import (
     ImaginaryServiceConnection,
@@ -91,6 +91,7 @@ class TestServiceClient(TestCase):
             'a', 'b',
             {'c': 1, 'd': 2},
         )
+
         # Should receive an integer back
         self.assertIsInstance(result, int)
 
@@ -136,3 +137,56 @@ class TestServiceClient(TestCase):
                 'a', 'b',
                 {'c': 1, 'd': 2},
             )
+
+
+class TestConstructorMocks(TestCase):
+    """
+    Tests for `modules.classes` using mocked class constructors to limit test
+    scope and assert calls to nested objects.
+    """
+
+    @patch('modules.classes.ImaginaryServiceConnection')
+    def test_service_client_with_mocked_connection_class(
+        self,
+        ImaginaryServiceConnection,
+    ):
+        """
+        Mock the `modules.classes.ImaginaryServiceConnection` class and assert
+        that it was used as expected by the ServiceClient.
+        """
+
+        # Establish a mock class instance to be returned by the constructor
+        isc_instance_mock = Mock()
+        # Set a return value for the instance's `call` function
+        isc_instance_mock.call.return_value = 'result'
+
+        # Set the instance mock as the return value of the class itself
+        ImaginaryServiceConnection.return_value = isc_instance_mock
+
+        # Instantiate `ServiceClient` and call `call_remote_function`
+        sc = ServiceClient('username', 'password')
+        result = sc.call_remote_function(
+            'some_function',
+            'a', 'b',
+            {'c': 1, 'd': 2},
+        )
+
+        # Verify the expected calls to the mocked class
+
+        # The base class should have been instantiated with the expected args
+        ImaginaryServiceConnection.assert_called_once_with(
+            'username',
+            'password',
+        )
+
+        # The mocked `ImaginaryServiceConnection` instance should have had the
+        # `.call` function called with the expected args
+        isc_instance_mock.call.assert_called_once_with(
+            'some_function',
+            'a', 'b',
+            {'c': 1, 'd': 2},
+        )
+
+        # The `ServiceClient.call_remote_function` call should have returned
+        # the expected result
+        self.assertEqual('result', result)

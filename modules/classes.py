@@ -19,6 +19,7 @@ class ImaginaryServiceConnection(object):
         """
         Establish the imaginary connection and return something nice.
         """
+
         self.username = username
         self.password = password
         self.service_url = SERVICE_URL
@@ -49,10 +50,12 @@ class ServiceClient(object):
         """
         Establish a connection to the imaginary service.
         """
+
         return ImaginaryServiceConnection(username, password)
 
     def call_remote_function(self, function_name, *args, **kwargs):
         """
         Call a remote function by name with the given args and kwargs.
         """
+
         return self.connection.call(function_name, *args, **kwargs)
