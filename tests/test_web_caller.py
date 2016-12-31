@@ -48,8 +48,8 @@ class TestWebCallerWithExceptions(TestCase):
     @patch('modules.web_caller.GOOGLE_URL', MOCK_GOOGLE_URL)
     def test_get_google_with_exception(self):
         """
-        Call the `get_google` function while using `patch` to create an
-        unreachable URL.
+        Call the `get_google` function while using `patch` on a module
+        variable to create an unreachable URL.
 
         Assert that the error happened and capture it using assertRaises.
         """
