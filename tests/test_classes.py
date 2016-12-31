@@ -8,7 +8,7 @@ from modules.classes import (
 )
 
 
-class TestImaingaryServiceConnection(TestCase):
+class TestImaginaryServiceConnection(TestCase):
     """
     Tests for the `modules.classes.ImaginaryServiceConnection` class.
     """
