@@ -3,5 +3,4 @@ python:
     - "2.7"
     - "3.4"
 install: "pip install -r requirements.txt"
-before_script: export PYTHONPATH=$PYTHONPATH:$(pwd)
-script: pytest --cov --flake8
+script: PYTHONPATH=. pytest --cov --flake8 .
