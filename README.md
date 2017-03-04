@@ -1,3 +1,5 @@
+https://codeship.com/projects/c3f85ce0-e33e-0134-12a6-3ae0b9756505/status?branch=master
+
 # Test examples
 A repository of some simple testing examples to demo various test cases and
 usage of mocking.
