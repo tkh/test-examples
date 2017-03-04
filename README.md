@@ -1,4 +1,4 @@
-[ ![Codeship Status for tkh/test-examples](https://app.codeship.com/projects/c3f85ce0-e33e-0134-12a6-3ae0b9756505/status?branch=master)](https://app.codeship.com/projects/205976)
+[ ![Codeship Status for tkh/test-examples](https://app.codeship.com/projects/c3f85ce0-e33e-0134-12a6-3ae0b9756505/status?branch=master)](https://app.codeship.com/projects/205976) [![Code Climate](https://codeclimate.com/github/tkh/test-examples/badges/gpa.svg)](https://codeclimate.com/github/tkh/test-examples)
 
 # Test examples
 A repository of some simple testing examples to demo various test cases and
