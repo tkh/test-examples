@@ -1,6 +1,0 @@
-mock
-pytest
-pytest-coverage
-pytest-flake8
-requests
-tox
