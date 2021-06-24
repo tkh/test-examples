@@ -1,6 +1,6 @@
 from unittest import TestCase
+from unittest.mock import patch, NonCallableMock
 from requests.exceptions import ConnectionError
-from mock import NonCallableMock, patch
 
 from modules.web_caller import get_google, GOOGLE_URL
 

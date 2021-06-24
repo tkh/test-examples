@@ -10,7 +10,7 @@ class ServiceError(Exception):
     """
 
 
-class ImaginaryServiceConnection(object):
+class ImaginaryServiceConnection:
     """
     An imaginary connection to an imaginary service.
     """
@@ -38,7 +38,7 @@ class ImaginaryServiceConnection(object):
         )
 
 
-class ServiceClient(object):
+class ServiceClient:
     """
     Provides access to an imaginary service.
     """
